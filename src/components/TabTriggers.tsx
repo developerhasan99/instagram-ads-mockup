@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "./ui/button";
 import {
 	Image,
@@ -8,43 +7,47 @@ import {
 	VideoIcon,
 } from "lucide-react";
 
-function TabTriggers() {
-	const [tab, setTab] = useState("mobile-app-install");
+const tabTriggers = [
+	{
+		key: "mobile-app-install",
+		icon: Smartphone,
+		text: "Mobile App Install",
+	},
+	{
+		key: "website-clicks",
+		icon: MousePointerClick,
+		text: "Website Clicks",
+	},
+	{
+		key: "video-post",
+		icon: VideoIcon,
+		text: "Video Post",
+	},
+	{
+		key: "photo-post",
+		icon: Image,
+		text: "Photo Post",
+	},
+	{
+		key: "instagram-story",
+		icon: Instagram,
+		text: "Instagram Story",
+	},
+];
 
+function TabTriggers({
+	tab,
+	setTab,
+}: {
+	tab: string;
+	setTab: React.Dispatch<React.SetStateAction<string>>;
+}) {
 	const handleTabChange = (target: string) => {
 		setTab(target);
 	};
 
-	const tabTriggers = [
-		{
-			key: "mobile-app-install",
-			icon: Smartphone,
-			text: "Mobile App Install",
-		},
-		{
-			key: "website-clicks",
-			icon: MousePointerClick,
-			text: "Website Clicks",
-		},
-		{
-			key: "video-post",
-			icon: VideoIcon,
-			text: "Video Post",
-		},
-		{
-			key: "photo-post",
-			icon: Image,
-			text: "Photo Post",
-		},
-		{
-			key: "instagram-story",
-			icon: Instagram,
-			text: "Instagram Story",
-		},
-	];
-
 	return (
-		<div className="flex flex-wrap justify-center gap-3 bg-gray-200 p-2 rounded-lg mb-8">
+		<div className="flex flex-wrap justify-center gap-3 bg-gray-200 p-2 rounded-lg mb-10">
 			{tabTriggers.map((trigger) => {
 				return (
 					<Button
