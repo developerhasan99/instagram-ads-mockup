@@ -1,3 +1,4 @@
+import { useAppContext } from "@/context/context";
 import { Button } from "./ui/button";
 import {
 	Image,
@@ -35,13 +36,9 @@ const tabTriggers = [
 	},
 ];
 
-function TabTriggers({
-	tab,
-	setTab,
-}: {
-	tab: string;
-	setTab: React.Dispatch<React.SetStateAction<string>>;
-}) {
+function TabTriggers() {
+	const { tab, setTab } = useAppContext();
+
 	const handleTabChange = (target: string) => {
 		setTab(target);
 	};

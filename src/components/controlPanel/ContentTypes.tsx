@@ -1,8 +1,9 @@
-import { Button } from "./ui/button";
+import image_type_mockup from "@/assets/images/ig_ads_mockup_type_image.webp";
+import video_type_mockup from "@/assets/images/ig_ads_mockup_type_video.webp";
+import carousel_type_mockup from "@/assets/images/ig_ads_mockup_type_carousel.webp";
 
-import image_type_mockup from "../assets/images/ig_ads_mockup_type_image.webp";
-import video_type_mockup from "../assets/images/ig_ads_mockup_type_video.webp";
-import carousel_type_mockup from "../assets/images/ig_ads_mockup_type_carousel.webp";
+import { useAppContext } from "@/context/context";
+import { Button } from "../ui/button";
 
 type ContentType = {
 	key: string;
@@ -41,15 +42,9 @@ const contentTypesTab: ContentTypesTabType = {
 	],
 };
 
-function ContentTypes({
-	tab,
-	contentType,
-	setContentType,
-}: {
-	tab: string;
-	contentType: string;
-	setContentType: React.Dispatch<React.SetStateAction<string>>;
-}) {
+function ContentTypes() {
+	const { tab, contentType, setContentType } = useAppContext();
+
 	const handleContentTypeChange = (nextContentType: string) => {
 		setContentType(nextContentType);
 	};

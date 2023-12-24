@@ -1,3 +1,5 @@
+import { useAppContext } from "@/context/context";
+
 type HeadingType = {
 	heading: string;
 	subheading: string;
@@ -35,7 +37,8 @@ const headings: HeadingsObjectType = {
 	},
 };
 
-function Headings({ tab }: { tab: string }) {
+function Headings() {
+	const { tab } = useAppContext();
 	return (
 		<>
 			<h3 className="tracking-tight font-bold text-3xl mb-3">
