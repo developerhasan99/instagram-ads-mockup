@@ -1,6 +1,7 @@
 import instagram_logo from "@/assets/images/instagram-mockup-logo.svg";
-import your_logo from "@/assets/images/your-logo.png";
-import default_mockup_image from "@/assets/images/ig_ads_mockup_default_img.png";
+import your_logo from "@/assets/images/your-logo.svg";
+import default_mockup_image from "@/assets/images/your-image-here.svg";
+import play_icon from "../../assets/images/play-icon.webp";
 
 import {
 	Bookmark,
@@ -19,7 +20,7 @@ interface commonAdsProps {
 }
 
 const CommonAds: React.FC<commonAdsProps> = ({ elementRef }) => {
-	const { adsData } = useAppContext();
+	const { tab, adsData, contentType } = useAppContext();
 
 	return (
 		<div className="p-3 mb-2" ref={elementRef}>
@@ -58,26 +59,58 @@ const CommonAds: React.FC<commonAdsProps> = ({ elementRef }) => {
 					</div>
 					<MoreHorizontal size={20} />
 				</div>
-				<img
-					src={adsData.thumbnail ? adsData.thumbnail : default_mockup_image}
-					alt="Your Image Here"
-				/>
-				<div className="px-3 py-2 border-b border-gray-400 flex justify-between items-center">
-					<p className="text-xs">Install Now</p>
-					<ChevronRight size={18} />
+				<div className="relative">
+					<img
+						src={adsData.thumbnail ? adsData.thumbnail : default_mockup_image}
+						alt="Your Image Here"
+					/>
+					{contentType === "video" && (
+						<img
+							className="absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4"
+							height={60}
+							width={60}
+							src={play_icon}
+							alt="Play Icon"
+						/>
+					)}
+					{contentType === "carousel" && (
+						<div className="absolute top-3 right-3 px-2 py-1 rounded-full text-white bg-gray-700/30 ">
+							1/5
+						</div>
+					)}
 				</div>
+				{tab !== "video-post" && (
+					<div className="px-3 py-2 border-b border-gray-400 flex justify-between items-center">
+						<p className="text-xs">
+							{adsData.cta ? adsData.cta : "Select CTA first"}
+						</p>
+						<ChevronRight size={18} />
+					</div>
+				)}
 				<div className="p-3 flex justify-between">
 					<div className="flex gap-2">
 						<Heart size={16} />
 						<MessageCircle size={16} />
 						<Send size={16} />
 					</div>
+					{contentType === "carousel" && (
+						<div className="flex items-center gap-2 pr-8">
+							<div className="h-1 w-1 bg-gray-800 rounded"></div>
+							<div className="h-1 w-1 bg-gray-800 rounded"></div>
+							<div className="h-1 w-1 bg-gray-800 rounded"></div>
+							<div className="h-1 w-1 bg-gray-800 rounded"></div>
+							<div className="h-1 w-1 bg-gray-800 rounded"></div>
+						</div>
+					)}
 					<Bookmark size={16} />
 				</div>
-				<p className="px-3 text-xs">20 Likes</p>
+				<p className="px-3 text-xs">{adsData.likes} Likes</p>
 				<p className="p-3 text-xs leading-6">
-					<strong className="pr-3">Your Page Here</strong> Lorem ipsum dolor sit
-					amet, consectetur adipiscing elit. ...more
+					<strong className="pr-3">{adsData.profileName}</strong>
+					{adsData.message
+						? adsData.message
+						: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}{" "}
+					...more
 				</p>
 			</div>
 		</div>

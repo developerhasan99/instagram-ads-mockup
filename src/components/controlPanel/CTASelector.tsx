@@ -5,6 +5,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { useAppContext } from "@/context/context";
 
 const CTAOptions: string[] = [
 	"Book Now",
@@ -22,6 +23,12 @@ const CTAOptions: string[] = [
 ];
 
 function CTASelector() {
+	const { adsData, setAdsData } = useAppContext();
+
+	const handleValueChange = (newValue: string) => {
+		setAdsData({ ...adsData, cta: newValue });
+	};
+
 	return (
 		<>
 			<h3 className="tracking-tight font-bold text-lg mb-2">
@@ -30,7 +37,7 @@ function CTASelector() {
 			<p className="text-muted-foreground mb-3">
 				Urge people to take action with a clear call-to-action button.
 			</p>
-			<Select>
+			<Select onValueChange={handleValueChange} value={adsData.cta}>
 				<SelectTrigger>
 					<SelectValue placeholder="Select CTA" />
 				</SelectTrigger>

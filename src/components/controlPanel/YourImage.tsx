@@ -5,7 +5,7 @@ import { useDropzone } from "react-dropzone";
 
 const YourImage: React.FC = () => {
 	const [filename, setFilename] = useState("");
-	const { adsData, setAdsData } = useAppContext();
+	const { adsData, setAdsData, contentType } = useAppContext();
 
 	const resetImageData = () => {
 		setFilename("");
@@ -28,7 +28,9 @@ const YourImage: React.FC = () => {
 
 	return (
 		<div className="mb-8">
-			<h3 className="tracking-tight font-bold text-lg mb-2">Your Image</h3>
+			<h3 className="tracking-tight font-bold text-lg mb-2">
+				{contentType === "video" ? "Video Thumbnail" : "Your Image"}
+			</h3>
 			<p className="text-muted-foreground mb-3">
 				Select attention-grabbing, visually striking pictures to engage your
 				target audience. Recommended image dimensions: 1000 x 1000 pixels.

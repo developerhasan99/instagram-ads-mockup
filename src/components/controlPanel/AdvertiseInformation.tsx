@@ -1,8 +1,8 @@
 import { Camera } from "lucide-react";
-import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useAppContext } from "@/context/context";
 import { ChangeEvent } from "react";
+import profile_pic from "../../assets/images/your-logo.svg";
 
 export default function AdvertiseInformation() {
 	const { adsData, setAdsData } = useAppContext();
@@ -22,10 +22,19 @@ export default function AdvertiseInformation() {
 			<p className="text-muted-foreground mb-3">
 				Designate the Instagram profile that your ads will be linked to.
 			</p>
-			<div className="flex gap-4 mb-8">
-				<Button variant="secondary" style={{ width: 80 }}>
-					<Camera />
-				</Button>
+			<div className="flex items-center gap-4 mb-8">
+				<div className="relative">
+					<img
+						height={60}
+						width={60}
+						className="rounded-full"
+						src={profile_pic}
+						alt="Profile image"
+					/>
+					<button className="absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 shadow-lg">
+						<Camera color="white" />
+					</button>
+				</div>
 				<Input
 					value={adsData.profileName}
 					onChange={handleOnchange}
