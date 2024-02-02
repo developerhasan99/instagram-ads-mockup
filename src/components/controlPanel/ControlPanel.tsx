@@ -10,7 +10,17 @@ import Message from "./Message";
 import { useAppContext } from "@/context/context";
 
 const ControlPanel: React.FC = () => {
-	const { tab } = useAppContext();
+	const { tab, setAdsData } = useAppContext();
+	const clearFields = () => {
+		setAdsData({
+			profilePic: "",
+			profileName: "Your Page Here",
+			thumbnail: "",
+			cta: "",
+			likes: "",
+			message: "",
+		});
+	};
 
 	return (
 		<div className="md:col-span-5">
@@ -21,7 +31,9 @@ const ControlPanel: React.FC = () => {
 			{tab !== "video-post" && <CTASelector />}
 			<LikesCount />
 			<Message />
-			<Button className="mb-8">Reset All Fields</Button>
+			<Button onClick={clearFields} className="mb-8">
+				Reset All Fields
+			</Button>
 		</div>
 	);
 };

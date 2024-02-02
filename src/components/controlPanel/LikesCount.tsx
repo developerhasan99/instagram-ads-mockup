@@ -3,9 +3,11 @@ import { Input } from "../ui/input";
 
 const LikesCount = () => {
 	const { adsData, setAdsData } = useAppContext();
-
 	const handleChange = (event: React.ChangeEvent) => {
-		setAdsData({ ...adsData, likes: (event.target as HTMLInputElement).value });
+		setAdsData({
+			...adsData,
+			likes: (event.target as HTMLInputElement).value,
+		});
 	};
 
 	return (
@@ -15,7 +17,12 @@ const LikesCount = () => {
 				Establish the desired number of likes for your post. Only numerical
 				inputs allowed.
 			</p>
-			<Input onChange={handleChange} type="number" min={0} />
+			<Input
+				onChange={handleChange}
+				type="number"
+				value={adsData.likes}
+				min={0}
+			/>
 		</>
 	);
 };

@@ -28,7 +28,6 @@ function CTASelector() {
 	const handleValueChange = (newValue: string) => {
 		setAdsData({ ...adsData, cta: newValue });
 	};
-
 	return (
 		<>
 			<h3 className="tracking-tight font-bold text-lg mb-2">

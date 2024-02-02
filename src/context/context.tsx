@@ -30,6 +30,7 @@ interface ContextProps {
 			message: string;
 		}>
 	>;
+	// clearInputs: Dispatch<SetStateAction<string>>;
 }
 
 const defaultValue: ContextProps = {
