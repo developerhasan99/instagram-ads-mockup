@@ -6,7 +6,6 @@ import { useDropzone } from "react-dropzone";
 const YourImage: React.FC = () => {
 	const [filename, setFilename] = useState("");
 	const { adsData, setAdsData, contentType } = useAppContext();
-
 	const resetImageData = () => {
 		setFilename("");
 		setAdsData({ ...adsData, thumbnail: "" });

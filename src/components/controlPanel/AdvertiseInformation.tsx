@@ -1,11 +1,11 @@
 import { Camera } from "lucide-react";
 import { Input } from "../ui/input";
 import { useAppContext } from "@/context/context";
-import { ChangeEvent } from "react";
-import profile_pic from "../../assets/images/your-logo.svg";
-
+import { ChangeEvent, useRef } from "react";
 export default function AdvertiseInformation() {
 	const { adsData, setAdsData } = useAppContext();
+
+	const fileInputRef = useRef<HTMLInputElement | null>(null);
 
 	const handleOnchange = (e: ChangeEvent) => {
 		setAdsData({
@@ -13,7 +13,11 @@ export default function AdvertiseInformation() {
 			profileName: (e.target as HTMLInputElement).value,
 		});
 	};
-
+	const handleClick = () => {
+		if (fileInputRef.current) {
+			fileInputRef.current.click();
+		}
+	};
 	return (
 		<>
 			<h3 className="tracking-tight font-bold text-lg mb-2">
@@ -28,12 +32,16 @@ export default function AdvertiseInformation() {
 						height={60}
 						width={60}
 						className="rounded-full"
-						src={profile_pic}
+						src={adsData.profilePic}
 						alt="Profile image"
 					/>
-					<button className="absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 shadow-lg">
+					<button
+						onClick={handleClick}
+						className="absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 shadow-lg"
+					>
 						<Camera color="white" />
 					</button>
+					<input className="hidden" ref={fileInputRef} type="file" />
 				</div>
 				<Input
 					value={adsData.profileName}

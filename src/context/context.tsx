@@ -6,6 +6,7 @@ import {
 	Dispatch,
 	SetStateAction,
 } from "react";
+import profile_pic from "../assets/images/your-logo.svg";
 
 interface ContextProps {
 	tab: string;
@@ -37,7 +38,7 @@ const defaultValue: ContextProps = {
 	tab: "mobile-app-install",
 	contentType: "image",
 	adsData: {
-		profilePic: "",
+		profilePic: `${profile_pic}`,
 		profileName: "Your Page Here",
 		thumbnail: "",
 		cta: "",

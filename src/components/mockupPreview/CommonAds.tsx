@@ -1,5 +1,4 @@
 import instagram_logo from "@/assets/images/instagram-mockup-logo.svg";
-import your_logo from "@/assets/images/your-logo.svg";
 import default_mockup_image from "@/assets/images/your-image-here.svg";
 import play_icon from "../../assets/images/play-icon.webp";
 
@@ -49,7 +48,7 @@ const CommonAds: React.FC<commonAdsProps> = ({ elementRef }) => {
 							className="rounded-full"
 							height={40}
 							width={40}
-							src={your_logo}
+							src={adsData.profilePic}
 							alt="Your Logo"
 						/>
 						<div>
