@@ -8,12 +8,13 @@ import AdvertiseInformation from "./AdvertiseInformation";
 import LikesCount from "./LikesCount";
 import Message from "./Message";
 import { useAppContext } from "@/context/context";
+import profile_pic from "../../assets/images/your-logo.svg";
 
 const ControlPanel: React.FC = () => {
 	const { tab, setAdsData } = useAppContext();
 	const clearFields = () => {
 		setAdsData({
-			profilePic: "",
+			profilePic: `${profile_pic}`,
 			profileName: "Your Page Here",
 			thumbnail: "",
 			cta: "",
