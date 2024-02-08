@@ -30,9 +30,12 @@ const ControlPanel: React.FC = () => {
 			<AdvertiseInformation />
 			<YourImage />
 			{tab !== "video-post" && <CTASelector />}
-			<LikesCount />
-			<Message />
-			<Button onClick={clearFields} className="mb-8">
+			{tab !== "instagram-story" && <LikesCount />}
+			{tab !== "instagram-story" && <Message />}
+			<Button
+				onClick={clearFields}
+				className={tab === "instagram-story" ? "my-8" : "mb-8"}
+			>
 				Reset All Fields
 			</Button>
 		</div>
