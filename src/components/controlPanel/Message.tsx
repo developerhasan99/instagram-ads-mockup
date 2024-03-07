@@ -1,14 +1,11 @@
-import { useAppContext } from "@/context/context";
 import { Textarea } from "../ui/textarea";
+import useAdsData from "@/store/adsData";
 
 const Message = () => {
-	const { adsData, setAdsData } = useAppContext();
+	const { message, setMessage } = useAdsData()
 
 	const handleChange = (event: React.ChangeEvent) => {
-		setAdsData({
-			...adsData,
-			message: (event.target as HTMLInputElement).value,
-		});
+		setMessage((event.target as HTMLInputElement).value)
 	};
 
 	return (
@@ -20,7 +17,7 @@ const Message = () => {
 			</p>
 			<Textarea
 				onChange={handleChange}
-				value={adsData.message}
+				value={message}
 				className="mb-8"
 			/>
 		</>

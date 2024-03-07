@@ -7,20 +7,13 @@ import ContentTypes from "./ContentTypes";
 import AdvertiseInformation from "./AdvertiseInformation";
 import LikesCount from "./LikesCount";
 import Message from "./Message";
-import { useAppContext } from "@/context/context";
-import profile_pic from "../../assets/images/your-logo.svg";
+import useAdsData from "@/store/adsData";
 
 const ControlPanel: React.FC = () => {
-	const { tab, setAdsData } = useAppContext();
+
+	const { adType } = useAdsData()
 	const clearFields = () => {
-		setAdsData({
-			profilePic: `${profile_pic}`,
-			profileName: "Your Page Here",
-			thumbnail: "",
-			cta: "",
-			likes: "",
-			message: "",
-		});
+
 	};
 
 	return (
@@ -29,12 +22,12 @@ const ControlPanel: React.FC = () => {
 			<ContentTypes />
 			<AdvertiseInformation />
 			<YourImage />
-			{tab !== "video-post" && <CTASelector />}
-			{tab !== "instagram-story" && <LikesCount />}
-			{tab !== "instagram-story" && <Message />}
+			{adType !== "video-post" && <CTASelector />}
+			{adType !== "instagram-story" && <LikesCount />}
+			{adType !== "instagram-story" && <Message />}
 			<Button
 				onClick={clearFields}
-				className={tab === "instagram-story" ? "my-8" : "mb-8"}
+				className={adType === "instagram-story" ? "my-8" : "mb-8"}
 			>
 				Reset All Fields
 			</Button>

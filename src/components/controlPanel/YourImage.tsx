@@ -1,20 +1,21 @@
-import { useAppContext } from "@/context/context";
+import useAdsData from "@/store/adsData";
 import { X } from "lucide-react";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 const YourImage: React.FC = () => {
 	const [filename, setFilename] = useState("");
-	const { adsData, setAdsData, contentType } = useAppContext();
+	const { thumbnail, setThumbnail, contentType } = useAdsData()
+
 	const resetImageData = () => {
 		setFilename("");
-		setAdsData({ ...adsData, thumbnail: "" });
+		setThumbnail("");
 	};
 
 	const onDrop = useCallback((acceptedFiles: File[]) => {
 		const imageUrl = URL.createObjectURL(acceptedFiles[0]);
 
-		setAdsData({ ...adsData, thumbnail: imageUrl });
+		setThumbnail(imageUrl);
 		setFilename(acceptedFiles[0].name);
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -36,9 +37,8 @@ const YourImage: React.FC = () => {
 			</p>
 			<div
 				{...getRootProps()}
-				className={`p-6 border-2 border-dashed rounded-lg ${
-					isDragActive ? "border-green-500" : "border-gray-300"
-				} flex justify-center items-center h-40 cursor-pointer`}
+				className={`p-6 border-2 border-dashed rounded-lg ${isDragActive ? "border-green-500" : "border-gray-300"
+					} flex justify-center items-center h-40 cursor-pointer`}
 			>
 				<input {...getInputProps()} />
 				<p className="text-gray-500 text-center">
@@ -51,7 +51,7 @@ const YourImage: React.FC = () => {
 				<div className="mt-4 bg-slate-100 p-2 rounded flex gap-4">
 					<img
 						width={40}
-						src={adsData.thumbnail}
+						src={thumbnail}
 						alt={filename}
 						className="rounded"
 					/>

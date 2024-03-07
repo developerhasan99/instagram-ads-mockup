@@ -1,12 +1,16 @@
 import { ChevronUp, X, MoreHorizontal } from "lucide-react";
-import { useAppContext } from "@/context/context";
-import default_mockup_image from "@/assets/images/your-image-here.svg";
+import default_thumbnail from "@/assets/images/default_thumbnail.svg";
 import play_icon from "../../assets/images/play-icon.webp";
+import useAdsData from "@/store/adsData";
+import default_profile_pic from "@/assets/images/default_profile_pic.svg";
+
+
 interface commonAdsProps {
 	elementRef: React.MutableRefObject<null>;
 }
 const InstagramAds: React.FC<commonAdsProps> = ({ elementRef }) => {
-	const { tab, adsData, contentType } = useAppContext();
+
+	const { profilePic, profileName, thumbnail, cta, adType, contentType } = useAdsData()
 
 	return (
 		<div className="p-3 mb-2" ref={elementRef}>
@@ -22,11 +26,11 @@ const InstagramAds: React.FC<commonAdsProps> = ({ elementRef }) => {
 								className="rounded-full"
 								height={40}
 								width={40}
-								src={adsData.profilePic}
+								src={profilePic ? profilePic : default_profile_pic}
 								alt="Your Logo"
 							/>
 							<div>
-								<h3 className="font-bold text-sm">{adsData.profileName}</h3>
+								<h3 className="font-bold text-sm">{profileName}</h3>
 								<p className="text-xs">Sponsored</p>
 							</div>
 						</div>
@@ -36,8 +40,8 @@ const InstagramAds: React.FC<commonAdsProps> = ({ elementRef }) => {
 						</div>
 					</div>
 					<img
-						className={tab === "instagram-story" ? "rounded-t " : ""}
-						src={adsData.thumbnail ? adsData.thumbnail : default_mockup_image}
+						className={adType === "instagram-story" ? "rounded-t " : ""}
+						src={thumbnail ? thumbnail : default_thumbnail}
 						alt="Your Image Here"
 					/>
 					{contentType === "video" && (
@@ -56,7 +60,7 @@ const InstagramAds: React.FC<commonAdsProps> = ({ elementRef }) => {
 						<ChevronUp />
 					</div>
 					<div className="rounded-full bg-black text-white px-5 py-3">
-						{adsData.cta ? adsData.cta : "Install Now"}
+						{cta ? cta : "Install Now"}
 					</div>
 				</div>
 			</div>

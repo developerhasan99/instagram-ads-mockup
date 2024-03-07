@@ -1,36 +1,32 @@
 import { Camera } from "lucide-react";
 import { Input } from "../ui/input";
-import { useAppContext } from "@/context/context";
-import { ChangeEvent, useEffect, useRef } from "react";
-export default function AdvertiseInformation() {
-	const { adsData, setAdsData } = useAppContext();
+import { ChangeEvent, useRef } from "react";
+import useAdsData from "@/store/adsData";
 
+import default_profile_pic from "@/assets/images/default_profile_pic.svg";
+
+
+export default function AdvertiseInformation() {
+	const { profilePic, profileName, setProfileName, setProfilePic } = useAdsData()
 	const fileInputRef = useRef<HTMLInputElement | null>(null);
 
 	const handleOnchange = (e: ChangeEvent) => {
-		setAdsData({
-			...adsData,
-			profileName: (e.target as HTMLInputElement).value,
-		});
+		const newValue = (e.target as HTMLInputElement).value;
+		setProfileName(newValue);
 	};
 
 	const handleOnchange2 = (e: ChangeEvent) => {
-		setAdsData({
-			...adsData,
-			profilePic: URL.createObjectURL(
-				(e.target as HTMLInputElement).files?.[0] as File
-			),
-		});
+		const newUrl = URL.createObjectURL(
+			(e.target as HTMLInputElement).files?.[0] as File
+		);
+		setProfilePic(newUrl);
 	};
+
 	const handleClick = () => {
 		if (fileInputRef.current) {
 			fileInputRef.current.click();
 		}
 	};
-
-	useEffect(() => {
-		console.log(adsData.profilePic);
-	}, [adsData.profilePic]);
 
 	return (
 		<>
@@ -46,7 +42,7 @@ export default function AdvertiseInformation() {
 						height={60}
 						width={60}
 						className="rounded-full"
-						src={adsData.profilePic}
+						src={profilePic ? profilePic : default_profile_pic}
 						alt="Profile image"
 					/>
 					<button
@@ -64,7 +60,7 @@ export default function AdvertiseInformation() {
 					/>
 				</div>
 				<Input
-					value={adsData.profileName}
+					value={profileName}
 					onChange={handleOnchange}
 					className="flex-grow"
 				/>

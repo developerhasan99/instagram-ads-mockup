@@ -1,13 +1,12 @@
-import { useAppContext } from "@/context/context";
 import { Input } from "../ui/input";
+import useAdsData from "@/store/adsData";
 
 const LikesCount = () => {
-	const { adsData, setAdsData } = useAppContext();
+	const { likes, setLikes } = useAdsData();
+
 	const handleChange = (event: React.ChangeEvent) => {
-		setAdsData({
-			...adsData,
-			likes: (event.target as HTMLInputElement).value,
-		});
+		const numLike = parseInt((event.target as HTMLInputElement).value || '0')
+		setLikes(numLike)
 	};
 
 	return (
@@ -20,7 +19,7 @@ const LikesCount = () => {
 			<Input
 				onChange={handleChange}
 				type="number"
-				value={adsData.likes}
+				value={likes}
 				min={0}
 			/>
 		</>

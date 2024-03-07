@@ -1,9 +1,9 @@
-import image_type_mockup from "@/assets/images/ig_ads_mockup_type_image.webp";
-import video_type_mockup from "@/assets/images/ig_ads_mockup_type_video.webp";
-import carousel_type_mockup from "@/assets/images/ig_ads_mockup_type_carousel.webp";
+import image_type_mockup from "@/assets/images/ig_ads_mockup_type_image.svg";
+import video_type_mockup from "@/assets/images/ig_ads_mockup_type_video.svg";
+import carousel_type_mockup from "@/assets/images/ig_ads_mockup_type_carousel.svg";
 
-import { useAppContext } from "@/context/context";
 import { Button } from "../ui/button";
+import useAdsData from "@/store/adsData";
 
 type ContentType = {
 	key: string;
@@ -43,7 +43,7 @@ const contentTypesTab: ContentTypesTabType = {
 };
 
 function ContentTypes() {
-	const { tab, contentType, setContentType } = useAppContext();
+	const { adType, contentType, setContentType } = useAdsData();
 
 	const handleContentTypeChange = (nextContentType: string) => {
 		setContentType(nextContentType);
@@ -51,13 +51,13 @@ function ContentTypes() {
 
 	return (
 		<>
-			{contentTypesTab[tab].length !== 0 && (
+			{contentTypesTab[adType].length !== 0 && (
 				<>
 					<h3 className="tracking-tight font-bold text-lg mb-3">
 						Select your content type:
 					</h3>
 					<div className="flex gap-4 mb-10">
-						{contentTypesTab[tab].map((contentTab) => {
+						{contentTypesTab[adType].map((contentTab) => {
 							return (
 								<Button
 									onClick={() => {

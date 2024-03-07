@@ -1,5 +1,6 @@
 import instagram_logo from "@/assets/images/instagram-mockup-logo.svg";
-import default_mockup_image from "@/assets/images/your-image-here.svg";
+import default_profile_pic from "@/assets/images/default_profile_pic.svg"
+import default_thumbnail from "@/assets/images/default_thumbnail.svg";
 import play_icon from "../../assets/images/play-icon.webp";
 
 import {
@@ -12,14 +13,27 @@ import {
 	PlusSquare,
 	Send,
 } from "lucide-react";
-import { useAppContext } from "@/context/context";
+import useAdsData from "@/store/adsData";
 
 interface commonAdsProps {
 	elementRef: React.MutableRefObject<null>;
 }
 
 const CommonAds: React.FC<commonAdsProps> = ({ elementRef }) => {
-	const { tab, adsData, contentType } = useAppContext();
+	const { profilePic, profileName, thumbnail, cta, message, likes, adType, contentType } = useAdsData();
+
+	function formatNumber(num: number) {
+		if (num >= 1e9) {
+			return (num / 1e9).toFixed(1) + 'B';
+		}
+		if (num >= 1e6) {
+			return (num / 1e6).toFixed(1) + 'M';
+		}
+		if (num >= 1e3) {
+			return (num / 1e3).toFixed(1) + 'K';
+		}
+		return num.toString();
+	}
 
 	return (
 		<div className="p-3 mb-2" ref={elementRef}>
@@ -48,11 +62,11 @@ const CommonAds: React.FC<commonAdsProps> = ({ elementRef }) => {
 							className="rounded-full"
 							height={40}
 							width={40}
-							src={adsData.profilePic}
+							src={profilePic ? profilePic : default_profile_pic}
 							alt="Your Logo"
 						/>
 						<div>
-							<h3 className="font-bold text-sm">{adsData.profileName}</h3>
+							<h3 className="font-bold text-sm">{profileName}</h3>
 							<p className="text-xs">Sponsored</p>
 						</div>
 					</div>
@@ -60,11 +74,11 @@ const CommonAds: React.FC<commonAdsProps> = ({ elementRef }) => {
 				</div>
 				<div className="relative">
 					<img
-						className={tab === "instagram-story" ? "rounded-t" : ""}
-						src={adsData.thumbnail ? adsData.thumbnail : default_mockup_image}
+						className={adType === "instagram-story" ? "rounded-t" : ""}
+						src={thumbnail ? thumbnail : default_thumbnail}
 						alt="Your Image Here"
 					/>
-					{contentType === "video" && tab !== "video-post" && tab !== "photo-post" && (
+					{contentType === "video" && adType !== "video-post" && adType !== "photo-post" && (
 						<img
 							className="absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4"
 							height={60}
@@ -73,17 +87,17 @@ const CommonAds: React.FC<commonAdsProps> = ({ elementRef }) => {
 							alt="Play Icon"
 						/>
 					)}
-					{contentType === "carousel" && tab !== "video-post" && tab !== "photo-post" && tab !== "instagram-story" &&(
+					{contentType === "carousel" && adType !== "video-post" && adType !== "photo-post" && adType !== "instagram-story" && (
 						<div className="absolute top-3 right-3 px-2 py-1 rounded-full text-white bg-gray-700/30 ">
 							1/5
 						</div>
 					)}
 				</div>
 
-				{tab !== "video-post" && (
+				{adType !== "video-post" && (
 					<div className="px-3 py-2 border-b border-gray-400 flex justify-between items-center">
 						<p className="text-xs">
-							{adsData.cta ? adsData.cta : "Select CTA first"}
+							{cta ? cta : "Select CTA first"}
 						</p>
 						<ChevronRight size={18} />
 					</div>
@@ -95,7 +109,7 @@ const CommonAds: React.FC<commonAdsProps> = ({ elementRef }) => {
 						<MessageCircle size={16} />
 						<Send size={16} />
 					</div>
-					{contentType === "carousel" && tab !== "video-post" && tab !== "photo-post" && tab !== "instagram-story" &&  (
+					{contentType === "carousel" && adType !== "video-post" && adType !== "photo-post" && adType !== "instagram-story" && (
 						<div className="flex items-center gap-2 pr-8">
 							<div className="h-1 w-1 bg-gray-800 rounded"></div>
 							<div className="h-1 w-1 bg-gray-800 rounded"></div>
@@ -107,11 +121,11 @@ const CommonAds: React.FC<commonAdsProps> = ({ elementRef }) => {
 					<Bookmark size={16} />
 				</div>
 
-				<p className="px-3 text-xs">{adsData.likes} Likes</p>
+				<p className="px-3 text-xs">{formatNumber(likes)} Likes</p>
 				<p className="p-3 text-xs leading-6">
-					<strong className="pr-3">{adsData.profileName}</strong>
-					{adsData.message
-						? adsData.message
+					<strong className="pr-3">{profileName}</strong>
+					{message
+						? message
 						: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}{" "}
 					...more
 				</p>

@@ -1,4 +1,3 @@
-import { useAppContext } from "@/context/context";
 import { Button } from "./ui/button";
 import {
 	Image,
@@ -7,6 +6,7 @@ import {
 	Smartphone,
 	VideoIcon,
 } from "lucide-react";
+import useAdsData from "@/store/adsData";
 
 const tabTriggers = [
 	{
@@ -37,10 +37,10 @@ const tabTriggers = [
 ];
 
 function TabTriggers() {
-	const { tab, setTab } = useAppContext();
+	const { adType, setAdType } = useAdsData()
 
 	const handleTabChange = (target: string) => {
-		setTab(target);
+		setAdType(target);
 	};
 
 	return (
@@ -53,7 +53,7 @@ function TabTriggers() {
 						}}
 						key={Math.random()}
 						className="inline-block flex-grow h-auto p-4"
-						variant={tab === trigger.key ? "default" : "outline"}
+						variant={adType === trigger.key ? "default" : "outline"}
 					>
 						<div className="mb-2 flex justify-center">
 							<trigger.icon size={35} strokeWidth="1" />

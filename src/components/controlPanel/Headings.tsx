@@ -1,4 +1,4 @@
-import { useAppContext } from "@/context/context";
+import useAdsData from "@/store/adsData";
 
 type HeadingType = {
 	heading: string;
@@ -38,13 +38,14 @@ const headings: HeadingsObjectType = {
 };
 
 function Headings() {
-	const { tab } = useAppContext();
+	const { adType } = useAdsData()
+
 	return (
 		<>
 			<h3 className="tracking-tight font-bold text-3xl mb-3">
-				{headings[tab].heading}
+				{headings[adType].heading}
 			</h3>
-			<p className="text-muted-foreground mb-8">{headings[tab].subheading}</p>
+			<p className="text-muted-foreground mb-8">{headings[adType].subheading}</p>
 		</>
 	);
 }
