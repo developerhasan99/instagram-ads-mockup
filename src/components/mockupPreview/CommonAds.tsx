@@ -64,7 +64,7 @@ const CommonAds: React.FC<commonAdsProps> = ({ elementRef }) => {
 						src={adsData.thumbnail ? adsData.thumbnail : default_mockup_image}
 						alt="Your Image Here"
 					/>
-					{contentType === "video" && (
+					{contentType === "video" && tab !== "video-post" && tab !== "photo-post" && (
 						<img
 							className="absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4"
 							height={60}
@@ -73,7 +73,7 @@ const CommonAds: React.FC<commonAdsProps> = ({ elementRef }) => {
 							alt="Play Icon"
 						/>
 					)}
-					{contentType === "carousel" && (
+					{contentType === "carousel" && tab !== "video-post" && tab !== "photo-post" && tab !== "instagram-story" &&(
 						<div className="absolute top-3 right-3 px-2 py-1 rounded-full text-white bg-gray-700/30 ">
 							1/5
 						</div>
@@ -95,7 +95,7 @@ const CommonAds: React.FC<commonAdsProps> = ({ elementRef }) => {
 						<MessageCircle size={16} />
 						<Send size={16} />
 					</div>
-					{contentType === "carousel" && (
+					{contentType === "carousel" && tab !== "video-post" && tab !== "photo-post" && tab !== "instagram-story" &&  (
 						<div className="flex items-center gap-2 pr-8">
 							<div className="h-1 w-1 bg-gray-800 rounded"></div>
 							<div className="h-1 w-1 bg-gray-800 rounded"></div>
